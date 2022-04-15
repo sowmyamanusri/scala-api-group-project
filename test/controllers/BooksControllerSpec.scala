@@ -25,6 +25,7 @@ class BooksControllerSpec extends PlaySpec with GuiceOneAppPerTest with Injectin
 
     "return 200 OK for all books request" in {
 
+      // Here we utilise Mockito for stubbing the request to getAllBooks
       when(mockDataService.getAllBooks).thenReturn(new ListBuffer[Book]())
 
       val controller = new BooksController(stubControllerComponents(), mockDataService)
@@ -36,6 +37,7 @@ class BooksControllerSpec extends PlaySpec with GuiceOneAppPerTest with Injectin
 
     "return empty JSON array of books for all books request" in {
 
+      // Here we utilise Mockito for stubbing the request to getAllBooks
       when(mockDataService.getAllBooks).thenReturn(new ListBuffer[Book]())
 
       val controller = new BooksController(stubControllerComponents(), mockDataService)
@@ -50,7 +52,10 @@ class BooksControllerSpec extends PlaySpec with GuiceOneAppPerTest with Injectin
   "BooksController GET bookById" should {
 
     "should return 200 OK for single book request" in {
+
+      // Here we utilise Mockito for stubbing the request to getBook
       when(mockDataService.getBook(1)) thenReturn sampleBook
+
       val controller = new BooksController(stubControllerComponents(), mockDataService)
       val book = controller.getBook(1).apply(FakeRequest(GET, "/books/1"))
 
