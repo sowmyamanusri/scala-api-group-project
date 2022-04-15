@@ -100,7 +100,13 @@ The features are:
 - Add a book
 - Update a book
 
-As well as the scala code it's worth having a look at the [routes](conf/routes) file as well. Can you see where the routes for the books are configured....
+As well as the scala code, it's worth having a look at the [routes](conf/routes) file as well. 
+
+Can you see where the routes for the books are configured? 🤔
+
+Here is a bit more detail on the [play framework HTTP routing](https://www.playframework.com/documentation/2.8.x/ScalaRouting)
+
+Feel free to share your thoughts or ask questions in your cohort Slack channel 🙌
 
 ### 📘 Task 2: Implement the following User Story with tests.
 
