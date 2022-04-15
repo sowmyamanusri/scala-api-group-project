@@ -1,20 +1,24 @@
 package controllers
 
-import play.api.mvc.{Action, AnyContent, BaseController, ControllerComponents}
-
-import scala.collection.mutable.ListBuffer
 import models.Book
+import play.api.mvc.{Action, AnyContent, BaseController, ControllerComponents}
 import play.api.libs.json._
+import repositories.BookRepository
 
 import javax.inject.{Inject, Singleton}
 
 @Singleton
-class BooksController @Inject()(val controllerComponents: ControllerComponents) extends BaseController {
-
-  val bookList = new ListBuffer[Book]()
-  bookList += Book(1, "Title", "James", "Some book description", "Horror")
+class BooksController @Inject()(val controllerComponents: ControllerComponents, dataRepository: BookRepository) extends BaseController {
 
   def getAll: Action[AnyContent] = Action {
-    if (bookList.isEmpty) NoContent else Ok(Json.toJson(bookList))
+    Ok(Json.toJson(dataRepository.getAllBooks))
+  }
+
+  def getBook(bookId: Long): Action[AnyContent] = Action {
+    var bookToReturn: Book = null
+    dataRepository.getBook(bookId) foreach { book =>
+      bookToReturn = book
+    }
+    Ok(Json.toJson(bookToReturn))
   }
 }
