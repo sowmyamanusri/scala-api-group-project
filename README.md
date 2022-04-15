@@ -106,7 +106,7 @@ As well as the scala code it's worth having a look at the [routes](conf/routes) 
 
 `User Story: As a user, I want to use the Book Manager API to delete a book using its ID`
 
-### 📘 Extension Task: Error handling
+### 📘 Extension Task 1: Error handling
 
 Oh no! 😭 We've only covered the happy paths in the solution, can you figure out a way
 to add in exception handling to the project?
@@ -114,5 +114,15 @@ to add in exception handling to the project?
 - Clue 1: What if someone wants to add a book with an ID for a book that already exists? How do we handle this gracefully?
 
 - Clue 2: What if someone wants to find a book by an ID that doesn't yet exist?
-  How can we improve the API by handling errors gracefully and show a helpful message to the client? What should the server status code be? 
+  How can we improve the API by handling errors gracefully and show a helpful message to the client? What should the server status code be?
+
+### 📘 Extension Task 2: HTML Serving
+
+Did you notice the [HomeController](app/controllers/HomeController.scala)?
+
+Try going to [http://localhost:9000/](http://localhost:9000/) - notice it serves back a web page.
+
+See if you can work out how those aspects of the application are hooked together.
+
+Have a play at updating that webpage 😍
   
