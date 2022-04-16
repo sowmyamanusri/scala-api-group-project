@@ -13,7 +13,6 @@ The API provides the following end points:
 * GET `/books` to retrieve all books
 * GET `/books/:bookId` to retrieve information about a single book
 * POST `/books` to save a new book (expects JSON to be posted in the request body)
-* PUT `/books/:bookId` to update a book (expects JSON to be posted in the request body)
 
 If you're a bit like me and want to see a starting from scratch tutorial on how an API like this can be made, here is a good tutorial through many of the approaches you'll find on the repository - just note we don't create a secure API in this example and as thus don't utilise any of the Auth0 services.
 
@@ -98,7 +97,6 @@ The features are:
 - Get all books
 - Get a book by ID
 - Add a book
-- Update a book
 
 As well as the scala code, it's worth having a look at the [routes](conf/routes) file as well. 
 
