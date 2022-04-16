@@ -9,7 +9,7 @@ import repositories.BookRepository
 import models.Book
 import org.mockito.ArgumentMatchers.any
 import org.mockito.Mockito.when
-
+import play.api.libs.json._
 import scala.collection.mutable
 
 class BooksControllerSpec extends PlaySpec with GuiceOneAppPerTest with Injecting with MockitoSugar {
@@ -69,13 +69,15 @@ class BooksControllerSpec extends PlaySpec with GuiceOneAppPerTest with Injectin
 
     "return 200 OK for adding a single book" in {
 
-      // Here we utilise Mockito for stubbing the request to getBook
+      // Here we utilise Mockito for stubbing the request to addBook
       when(mockDataService.addBook(any())) thenReturn sampleBook
 
-      val controller = new BooksController(stubControllerComponents(), mockDataService)
-      val book = controller.addBook().apply(FakeRequest(POST, "/books"))
 
-      status(book) mustBe OK
+      val controller = new BooksController(stubControllerComponents(), mockDataService)
+      val book = controller.addBook().apply(
+        FakeRequest(POST, "/books").withJsonBody(Json.toJson(sampleBook)))
+
+      status(book) mustBe CREATED
       contentType(book) mustBe Some("application/json")
     }
   }
