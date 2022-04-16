@@ -21,4 +21,23 @@ class BooksController @Inject()(val controllerComponents: ControllerComponents, 
     }
     Ok(Json.toJson(bookToReturn))
   }
+
+  def addBook() : Action[AnyContent] = Action {
+    implicit request => {
+      val requestBody = request.body
+      val bookJsonObject = requestBody.asJson
+
+      // This type of JSON un-marshalling will only work
+      // if ALL fields are POSTed in the request body
+      val bookItem: Option[Book] =
+        bookJsonObject.flatMap(
+          Json.fromJson[Book](_).asOpt
+        )
+
+      val savedBook: Option[Book] = dataRepository.addBook(bookItem.get)
+      Created(Json.toJson(savedBook))
+    }
+
+
+  }
 }

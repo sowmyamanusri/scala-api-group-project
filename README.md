@@ -117,7 +117,10 @@ Feel free to share your thoughts or ask questions in your cohort Slack channel ð
 Oh no! ðŸ˜­ We've only covered the happy paths in the solution, can you figure out a way
 to add in exception handling to the project?
 
-- Clue 1: What if someone wants to add a book with an ID for a book that already exists? How do we handle this gracefully?
+- Clue 1: What if someone wants to add a book with an ID for a book that already exists? 
+  - What currently happens? 
+  - How could we handle this more gracefully?
+  - Is the status code correct when someone tries to save a book that already exists?
 
 - Clue 2: What if someone wants to find a book by an ID that doesn't yet exist?
   How can we improve the API by handling errors gracefully and show a helpful message to the client? What should the server status code be?
