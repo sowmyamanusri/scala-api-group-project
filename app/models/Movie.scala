@@ -12,20 +12,21 @@ import play.api.libs.json.Json
  * Movie Class data members collection
  *  id: String
  *    follow to IMDb Movie Data Element ID, can extend the function of import data from IMDb API request
- *  ResultType: String
- *    data type of record, ie Title
- *  Image: String
+ *  resultType: String
+ *    data type of record, i.e. Title
+ *  image: String
  *    store URL of the Image
- *  Title: String
+ *  title: String
  *    store Title Name
- *  Description: String
+ *  description: String
  *    store Description of the Movie
- *  Rating: Int
- *    store the rating No from 1 to 5, for the update function of the data.
- *
+ *  imDbRating: String
+ *    store the rating No from 1 to 10 (decimal), for the update function of the data.
+ *  certificate: String
+ *    stores the certificate of the Movie to determine whether it is suitable for certain age groups e.g. PG, PG-13, R, etc.
  */
 
-case class Movie(id: String, ResultType: String, Image: String, Title: String, Description: String, Rating: Int)
+case class Movie(id: String, resultType: String, image: String, title: String, description: String, imDbRating: string, certificate: String)
 
 object Movie {
   implicit val format = Json.format[Movie]
