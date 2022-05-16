@@ -13,7 +13,7 @@ class MovieRepository {
  private val movieList = mutable.Set[Movie]()
   movieList += Movie(1,
     "tt1375666",
-    "Advanced Search"
+    "Advanced Search",
     "https://imdb-api.com/images/original/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_Ratio0.6837_AL_.jpg",
     "Inception",
     "(2010)",
