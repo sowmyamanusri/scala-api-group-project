@@ -11,7 +11,7 @@ class MovieRepository {
 // Trial val - data comes from IMDb-API
 // URL: https://imdb-api.com/API/AdvancedSearch/[API-KEY]/?title=inception
  private val movieList = mutable.Set[Movie]()
-  movieList += Movie(1,
+  movieList += Movie(
     "tt1375666",
     "Advanced Search",
     "https://imdb-api.com/images/original/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_Ratio0.6837_AL_.jpg",
