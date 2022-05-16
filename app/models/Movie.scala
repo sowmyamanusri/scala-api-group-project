@@ -26,7 +26,7 @@ import play.api.libs.json.Json
  *    stores the certificate of the Movie to determine whether it is suitable for certain age groups e.g. PG, PG-13, R, etc.
  */
 
-case class Movie(id: String, resultType: String, image: String, title: String, description: String, imDbRating: string, certificate: String)
+case class Movie(id: String, resultType: String, image: String, title: String, description: String, imDbRating: String, certificate: String)
 
 object Movie {
   implicit val format = Json.format[Movie]
