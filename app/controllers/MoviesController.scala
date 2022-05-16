@@ -8,7 +8,7 @@ import repositories.MovieRepository
 import javax.inject.{Inject, Singleton}
 
 @Singleton
-class MoviesController @Inject()(val controllerComponents: ControllerComponents, dataRepository: BookRepository) extends BaseController {
+class MoviesController @Inject()(val controllerComponents: ControllerComponents, dataRepository: MovieRepository) extends BaseController {
     
     def getAll: Action[AnyContent] = Action {
     Ok(Json.toJson(dataRepository.getAllMovies))
