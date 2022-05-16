@@ -20,12 +20,14 @@ import play.api.libs.json.Json
  *    store Title Name
  *  Description: String
  *    store Description of the Movie
+ *  Certification: String
+ *    seekable for children
  *  Rating: Int
  *    store the rating No from 1 to 5, for the update function of the data.
  *
  */
 
-case class Movie(id: String, ResultType: String, Image: String, Title: String, Description: String, Rating: Int)
+case class Movie(id: String, ResultType: String, Image: String, Title: String, Description: String, Certification: String, Rating: Int)
 
 object Movie {
   implicit val format = Json.format[Movie]
