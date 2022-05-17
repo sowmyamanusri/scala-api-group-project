@@ -10,7 +10,7 @@ import play.api.libs.json.Json
  * https://docs.scala-lang.org/tour/case-classes.html
  *
  * Movie Class data members collection
- *  id: String
+ *  id: Long
  *    follow to IMDb Movie Data Element ID, can extend the function of import data from IMDb API request
  *  ResultType: String
  *    data type of record, ie Title
@@ -27,7 +27,7 @@ import play.api.libs.json.Json
  *
  */
 
-case class Movie(id: String, ResultType: String, Image: String, Title: String, Description: String, Certification: String, Rating: Int)
+case class Movie(id: Long, ResultType: String, Image: String, Title: String, Description: String, Certification: String, Rating: Int)
 
 object Movie {
   implicit val format = Json.format[Movie]
