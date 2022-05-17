@@ -42,11 +42,12 @@ class MovieRepository {
       case None => throw new Exception("Movie not found")
     }
   }
-
-  def deleteMovie(movieId: Long): mutable.Set[Movie] = {
+  @throws(classOf[Exception])
+  def deleteMovie(movieId: String): Unit = {
     if(!movieList.exists(_.id == movieId)) {
-      println(s"Movie doesn't exist")
+      throw new Exception("Book not found")
     }
-    movieList-= movieList.filter( _.id == movieId)
+    movieList--= movieList.filter( _.id == movieId)
   }
+
 }
