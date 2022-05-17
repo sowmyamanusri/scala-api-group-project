@@ -22,7 +22,7 @@ class MovieRepository {
    * @param movieId The ID of the movie to find
    * @return Option[Movie] An option means this method can return a Movie or optionally a "None"
    */
-  def getMovie(movieId: Long): Option[Movie] = movieList.collectFirst {
+  def getMovieById(movieId: Long): Option[Movie] = movieList.collectFirst {
     case movie if movie.id == movieId => movie
   }
 }

@@ -10,7 +10,7 @@ import javax.inject.{Inject, Singleton}
 @Singleton
 class MoviesController @Inject()(val controllerComponents: ControllerComponents, dataRepository: MovieRepository) extends BaseController {
 
-  def getMovie(movieId: Long): Action[AnyContent] = Action {
+  def getMovieById(movieId: Long): Action[AnyContent] = Action {
     var movieToReturn: Movie = null
     dataRepository.getMovie(movieId) foreach { movie =>
       movieToReturn = movie
