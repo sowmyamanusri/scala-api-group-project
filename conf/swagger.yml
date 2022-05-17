@@ -1,0 +1,9 @@
+---
+openapi: 3.0.3
+info:
+  title: "Movie Manager API"
+  description: "Documentation for group project of movie manager API."
+consumes:
+  - application/json
+produces:
+  - application/json
