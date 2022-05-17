@@ -39,4 +39,6 @@ class MoviesController @Inject()(val controllerComponents: ControllerComponents,
       Created(Json.toJson(editMovie))}
     catch {case ex: Exception => InternalServerError(Json.obj("code" -> INTERNAL_SERVER_ERROR, "message" -> s"Rate movie error : ${ex.getMessage}"))}
   }
+
+
 }
