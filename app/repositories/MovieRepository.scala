@@ -45,7 +45,7 @@ class MovieRepository {
   @throws(classOf[Exception])
   def deleteMovie(movieId: String): Unit = {
     if(!movieList.exists(_.id == movieId)) {
-      throw new Exception("Book not found")
+      throw new Exception("Movie not found")
     }
     movieList--= movieList.filter( _.id == movieId)
   }
