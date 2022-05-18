@@ -11,10 +11,8 @@ import javax.inject.{Inject, Singleton}
 class MoviesController @Inject()(val controllerComponents: ControllerComponents, dataRepository: MovieRepository) extends BaseController {
 
   def getMovieById(movieId: String): Action[AnyContent] = Action {
-    var movieToReturn: Movie = null
-    dataRepository.getMovieById(movieId) foreach { movie =>
-      movieToReturn = movie
-    }
-    Ok(Json.toJson(movieToReturn))
+    val searchedMovies = dataRepository.getMovieById(movieId)
+    if (searchedMovies.isEmpty || searchedMovies == None) throw new Exception("No Movies found")
+    Ok(Json.toJson(searchedMovies))
   }
 }
