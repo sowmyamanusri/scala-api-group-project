@@ -51,7 +51,7 @@ GET     /books/:bookId              controllers.BooksController.getBook(bookId: 
 #           content:
 #               application/json:
 #                   schema:
-#                       $ref: '#/components/schemas/models.Book'
+#                       $ref: '#/components/schemas/models.Movie'
 ###
 GET     /movies                     controllers.MoviesController.getAll()
 
@@ -62,6 +62,15 @@ GET     /movies                     controllers.MoviesController.getAll()
 #        $ref: '#/components/schemas/models.Movie'
 ###
 PUT   /movies/:movieId              controllers.MoviesController.rateMovie(movieId: String)
+
+
+###
+#  parameters:
+#    - name: body
+#      schema:
+#        $ref: '#/components/schemas/models.Movie'
+###
+POST   /movies/addMovie              controllers.MoviesController.addMovie()
 
 ### NoDocs ###
 GET   /docs/swagger-ui/*file        controllers.Assets.at(path:String="/public/lib/swagger-ui", file:String)

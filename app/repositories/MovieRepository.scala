@@ -33,4 +33,17 @@ class MovieRepository {
       case None => throw new Exception("Movie not found")
     }
   }
+
+  def addMovie(movie: Movie): Option[Movie] = {
+    // If book already exists then return none
+    if (MovieList.exists(m => m.id == movie.id)) {
+      None
+    }
+    else {
+      // otherwise return the saved after adding it
+      MovieList.addOne(movie).collectFirst {
+        case m if m.id == movie.id => m
+      }
+    }
+  }
 }
