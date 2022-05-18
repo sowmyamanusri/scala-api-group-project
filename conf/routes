@@ -40,7 +40,29 @@ POST    /books                      controllers.BooksController.addBook()
 ###
 GET     /books/:bookId              controllers.BooksController.getBook(bookId: Long)
 
+<<<<<<< HEAD
 
+=======
+###
+#   summary: Get all Movie
+#   responses:
+#       200:
+#           description: success
+#           content:
+#               application/json:
+#                   schema:
+#                       $ref: '#/components/schemas/models.Book'
+###
+GET     /movies                     controllers.MoviesController.getAll()
+
+###
+#  parameters:
+#    - name: body
+#      schema:
+#        $ref: '#/components/schemas/models.Movie'
+###
+PUT   /movies/:movieId              controllers.MoviesController.rateMovie(movieId: String)
+>>>>>>> parent of 75f6020 (UpdateRate function add the test case into project)
 
 ### NoDocs ###
 GET   /docs/swagger-ui/*file        controllers.Assets.at(path:String="/public/lib/swagger-ui", file:String)
