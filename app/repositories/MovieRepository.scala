@@ -17,18 +17,23 @@ class MovieRepository {
     0
   )
 
-  def getAllMovies: mutable.Set[Movie] = MovieList
-
   def rateMovie(movieId: String, rateMovie: Movie): Option[Movie] = {
     // If book already exists then return none
     println(s"movieId:$movieId")
     var matchMovie = MovieList.find(_.id == movieId)
+    var updateMovie = Movie(matchMovie.get.id,
+      matchMovie.get.ResultType,
+      matchMovie.get.Image,
+      matchMovie.get.Title,
+      matchMovie.get.Description,
+      matchMovie.get.Certification,
+      rateMovie.Rating)
     println(s"movieId:$movieId is found: ${matchMovie.toString}")
     matchMovie match {
       case Some(movie) => {
         MovieList.remove(movie)
-        MovieList += rateMovie
-        return Option(rateMovie)
+        MovieList += updateMovie
+        return Option(updateMovie)
       }
       case None => throw new Exception("Movie not found")
     }
