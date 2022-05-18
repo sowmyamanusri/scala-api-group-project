@@ -20,4 +20,14 @@ GET     /assets/*file               controllers.Assets.versioned(path="/public",
 GET     /books                      controllers.BooksController.getAll()
 POST    /books                      controllers.BooksController.addBook()
 GET     /books/:bookId              controllers.BooksController.getBook(bookId: Long)
+###
+#   summary: Get all Movies
+#   responses:
+#       200:
+#           description: success
+#           content:
+#               application/json:
+#                   schema:
+#                       $ref: '#/components/schemas/models.Movie'
+###
 GET     /movies                     controllers.MoviesController.getAll()
