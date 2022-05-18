@@ -27,7 +27,7 @@ import play.api.libs.json.Json
  *
  */
 
-case class Movie(id: Long, ResultType: String, Image: String, Title: String, Description: String, Certification: String, Rating: Int)
+case class Movie(id: String, ResultType: String, Image: String, Title: String, Description: String, Certification: String, Rating: Int)
 
 object Movie {
   implicit val format = Json.format[Movie]
