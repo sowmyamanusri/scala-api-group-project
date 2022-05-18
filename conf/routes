@@ -44,33 +44,12 @@ POST    /books                      controllers.BooksController.addBook()
 GET     /books/:bookId              controllers.BooksController.getBook(bookId: Long)
 
 ###
-#   summary: Get all Movie
-#   responses:
-#       200:
-#           description: success
-#           content:
-#               application/json:
-#                   schema:
-#                       $ref: '#/components/schemas/models.Movie'
-###
-GET     /movies                     controllers.MoviesController.getAll()
-
-###
 #  parameters:
 #    - name: body
 #      schema:
 #        $ref: '#/components/schemas/models.Movie'
 ###
-PUT   /movies/:movieId              controllers.MoviesController.rateMovie(movieId: String)
-
-
-###
-#  parameters:
-#    - name: body
-#      schema:
-#        $ref: '#/components/schemas/models.Movie'
-###
-POST   /movies/addMovie              controllers.MoviesController.addMovie()
+POST    /movies                      controllers.MoviesController.addMovie()
 
 ### NoDocs ###
 GET   /docs/swagger-ui/*file        controllers.Assets.at(path:String="/public/lib/swagger-ui", file:String)
