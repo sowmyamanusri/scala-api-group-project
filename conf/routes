@@ -85,6 +85,16 @@ GET     /movies/title/:title             controllers.MoviesController.getMovieBy
 #      schema:
 #        $ref: '#/components/schemas/models.Movie'
 ###
+POST    /movies                      controllers.MoviesController.addMovie()
+
+### NoDocs ###
+
+###
+#  parameters:
+#    - name: body
+#      schema:
+#        $ref: '#/components/schemas/models.Movie'
+###
 PUT   /movies/:movieId              controllers.MoviesController.rateMovie(movieId: String)
 
 ###
