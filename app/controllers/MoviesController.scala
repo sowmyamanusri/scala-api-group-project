@@ -35,7 +35,6 @@ class MoviesController @Inject()(val controllerComponents: ControllerComponents,
 
     def rateMovie(movieId: String): Action[AnyContent] = Action {
     implicit request =>
-      try {
         val requestBody = request.body
         val movieJsonObject = requestBody.asJson
 
@@ -46,14 +45,13 @@ class MoviesController @Inject()(val controllerComponents: ControllerComponents,
           Json.fromJson[Movie](_).asOpt
         )
         val editMovie = dataRepository.rateMovie(movieId, movieItem.get)
-        if (editMovie.isEmpty || editMovie == None) throw new Exception("Movie is not exists.")
-        Created(Json.toJson(editMovie))}
-      catch {case ex: Exception => InternalServerError(Json.obj("code" -> INTERNAL_SERVER_ERROR, "message" -> s"Rate movie error : ${ex.getMessage}"))}
+        if (editMovie.isEmpty) throw new Exception("Movie is not exists.")
+        Created(Json.toJson(editMovie))
+      //catch {case ex: Exception => InternalServerError(Json.obj("code" -> INTERNAL_SERVER_ERROR, "message" -> s"Rate movie error : ${ex.getMessage}"))}
   }
 
   def addMovie() : Action[AnyContent] = Action {
     implicit request =>
-      try {
         val requestBody = request.body
         val bookJsonObject = requestBody.asJson
 
@@ -65,8 +63,8 @@ class MoviesController @Inject()(val controllerComponents: ControllerComponents,
         )
         val savedMovie: Option[Movie] = dataRepository.addMovie(movieItem.get)
         if (savedMovie.isEmpty) throw new Exception("Movie already exists.")
-        Created(Json.toJson(savedMovie))}
-      catch {case ex: Exception => InternalServerError(Json.obj("code" -> INTERNAL_SERVER_ERROR, "message" -> s"Add Movie error : ${ex.getMessage}"))}
+        Created(Json.toJson(savedMovie))
+      //catch {case ex: Exception => InternalServerError(Json.obj("code" -> INTERNAL_SERVER_ERROR, "message" -> s"Add Movie error : ${ex.getMessage}"))}
   }
 }
 

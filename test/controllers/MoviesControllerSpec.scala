@@ -147,6 +147,7 @@ class MoviesControllerSpec extends PlaySpec with GuiceOneAppPerTest with Injecti
       exceptionCaught.getMessage mustBe "No Movies found"
     }
   }
+
   "MoviesController DELETE deleteById" should {
 
     "throw an error when deleting a book that doesn't exist" in {
@@ -160,22 +161,54 @@ class MoviesControllerSpec extends PlaySpec with GuiceOneAppPerTest with Injecti
     }
   }
 
-    def rateMovie(movieId: String): Action[AnyContent] = Action {
-    implicit request =>
-      try {
-        val requestBody = request.body
-        val movieJsonObject = requestBody.asJson
+  "MovieController run AddMovie" should {
 
-        // This type of JSON un-marshalling will only work
-        // if ALL fields are POSTed in the request body
-        val movieItem: Option[Movie] =
-        movieJsonObject.flatMap(
-          Json.fromJson[Movie](_).asOpt
-        )
-        val editMovie = dataRepository.rateMovie(movieId, movieItem.get)
-        if (editMovie.isEmpty || editMovie == None) throw new Exception("Movie is not exists.")
-        Created(Json.toJson(editMovie))}
-      catch {case ex: Exception => InternalServerError(Json.obj("code" -> INTERNAL_SERVER_ERROR, "message" -> s"Rate movie error : ${ex.getMessage}"))}
-  }
-}
+    val controller = new MoviesController(stubControllerComponents(), mockDataService)
+
+    "return 200 OK for Add single Movie " in {
+      val singleMovie: Option[Movie] = Option(Movie("tt0110413",
+        "Léon: The Professional",
+        "https://imdb-api.com/images/original/MV5BODllNWE0MmEtYjUwZi00ZjY3LThmNmQtZjZlMjI2YTZjYmQ0XkEyXkFqcGdeQXVyNTc1NTQxODI@._V1_Ratio0.6751_AL_.jpg",
+        "After her father, step-mother, step-sister and little brother are killed by her father's employers, the 12-year-old daughter of an abject drug dealer manages to take refuge in the apartment of a professional hitman who at her request teaches her the methods of his job so she can take her revenge on the corrupt DEA agent who ruined her life by killing her beloved brother.",
+        "R",
+        "4"
+      ))
+
+      // Here we utilise Mockito for stubbing the request to getBook
+      when(mockDataService.addMovie(any())) thenReturn singleMovie
+
+      val newMovie = controller.addMovie().apply(
+        FakeRequest(POST, "/movies").withJsonBody(Json.toJson(singleMovie)))
+
+      status(newMovie) mustBe CREATED
+      contentType(newMovie) mustBe Some("application/json")
+      contentAsString(newMovie) contains (Json.toJson(sampleMovie))
+    }
+
+    "MovieController run updateMovie" should {
+
+      val controller = new MoviesController(stubControllerComponents(), mockDataService)
+      val sampleMovie: Option[Movie] = Option(Movie("tt0110413",
+        "Léon: The Professional",
+        "https://imdb-api.com/images/original/MV5BODllNWE0MmEtYjUwZi00ZjY3LThmNmQtZjZlMjI2YTZjYmQ0XkEyXkFqcGdeQXVyNTc1NTQxODI@._V1_Ratio0.6751_AL_.jpg",
+        "After her father, step-mother, step-sister and little brother are killed by her father's employers, the 12-year-old daughter of an abject drug dealer manages to take refuge in the apartment of a professional hitman who at her request teaches her the methods of his job so she can take her revenge on the corrupt DEA agent who ruined her life by killing her beloved brother.",
+        "R",
+        "4"
+      ))
+      "return 200 OK for Update single Movie " in {
+
+        // Here we utilise Mockito for stubbing the request to getBook
+        when(mockDataService.rateMovie("2", sampleMovie.get)) thenReturn sampleMovie
+
+        var updateMovie = controller.rateMovie("2").apply(
+          FakeRequest(PUT, "/Movies").withJsonBody(Json.toJson(sampleMovie)))
+
+        status(updateMovie) mustBe CREATED
+        contentType(updateMovie) mustBe Some("application/json")
+        contentAsString(updateMovie) contains  ("\"Rating\":4")//(Json.toJson(sampleUpdatedMovie))
+      }
+    }
+    }
+
+
 }

@@ -44,35 +44,37 @@ class MovieRepository {
 
   @throws(classOf[Exception])
   def deleteMovie(movieId: String): Unit = {
-    if(!movieList.exists(_.id == movieId)) {
+    if (!movieList.exists(_.id == movieId)) {
       throw new Exception("Movie not found")
     }
-    movieList--= movieList.filter( _.id == movieId)
+    movieList --= movieList.filter(_.id == movieId)
+  }
 
     def rateMovie(movieId: String, rateMovie: Movie): Option[Movie] = {
     // If book already exists then return none
     println(s"movieId:$movieId")
-    var matchMovie = MovieList.find(_.id == movieId)
+    var matchMovie = movieList.find(_.id == movieId)
     println(s"movieId:$movieId is found: ${matchMovie.toString}")
     matchMovie match {
       case Some(movie) => {
-        MovieList.remove(movie)
-        MovieList += rateMovie
+        movieList.remove(movie)
+        movieList += rateMovie
         return Option(rateMovie)
       }
       case None => throw new Exception("Movie not found")
     }
   }
 
-    def addMovie(movie: Movie): Option[Movie] = {
-      // If book already exists then return none
-      if(MovieList.exists(m => m.id == movie.id)) {
-        None
+  def addMovie(movie: Movie): Option[Movie] = {
+    // If book already exists then return none
+    if (movieList.exists(m => m.id == movie.id)) {
+      None
+    }
+    else {
+      // otherwise return the saved after adding it
+      movieList.addOne(movie).collectFirst {
+        case m if m.id == movie.id => m
       }
-      else {
-        // otherwise return the saved after adding it
-        MovieList.addOne(movie).collectFirst {
-          case m if m.id == movie.id => m
-        }
-      }
+    }
+  }
 }
