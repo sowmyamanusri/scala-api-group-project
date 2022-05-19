@@ -1,7 +1,6 @@
 package repositories
 
 import models.Movie
-
 import javax.inject.Singleton
 import scala.collection.mutable
 
@@ -49,5 +48,27 @@ class MovieRepository {
       throw new Exception("Movie not found")
     }
     movieList--= movieList.filter( _.id == movieId)
+    
+    def rateMovie(movieId: String, rateMovie: Movie): Option[Movie] = {
+    // If book already exists then return none
+    // revise specification on 2022/5/19
+    println(s"movieId:$movieId")
+    var matchMovie = MovieList.find(_.id == movieId)
+    var updateMovie = Movie(
+      matchMovie.get.id,
+      matchMovie.get.Image,
+      matchMovie.get.Title,
+      matchMovie.get.plot,
+      matchMovie.get.Certification,
+      rateMovie.IMDbRating)
+    println(s"movieId:$movieId is found: ${matchMovie.toString}")
+    matchMovie match {
+      case Some(movie) => {
+        MovieList.remove(movie)
+        MovieList += updateMovie
+        return Option(updateMovie)
+      }
+      case None => throw new Exception("Movie not found")
+    }
   }
 }

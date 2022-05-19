@@ -8,10 +8,7 @@ import play.api.libs.json.Json
  * in Scala case classes are said to be equal if all their member variables are equal
  * See more on here under the title "Comparison"
  * https://docs.scala-lang.org/tour/case-classes.html
- *
- * Movie Class data members collection
- *  id: String
- *    follow to IMDb Movie Data Element ID, can extend the function of import data from IMDb API request
+
  *  title: String
  *    store Title Name
  *  image: String

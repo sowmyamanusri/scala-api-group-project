@@ -20,6 +20,7 @@ class BooksControllerSpec extends PlaySpec with GuiceOneAppPerTest with Injectin
     "Roald Dahl",
     "Brilliant",
     "Childs fiction"
+
   ))
 
   "BooksController GET allBooks" should {

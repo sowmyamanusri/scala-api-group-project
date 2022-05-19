@@ -10,6 +10,7 @@ GET     /                           controllers.HomeController.index()
 # Map static resources from the /public folder to the /assets URL path
 ### NoDocs ###
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
+
 ###
 #   summary: Get all Book
 #   responses:
@@ -20,6 +21,7 @@ GET     /assets/*file               controllers.Assets.versioned(path="/public",
 #                   schema:
 #                       $ref: '#/components/schemas/models.Book'
 ###
+
 GET     /books                      controllers.BooksController.getAll()
 ###
 #  parameters:
@@ -27,6 +29,7 @@ GET     /books                      controllers.BooksController.getAll()
 #      schema:
 #        $ref: '#/components/schemas/models.Book'
 ###
+
 POST    /books                      controllers.BooksController.addBook()
 ###
 #   summary: Get a Book by ID
@@ -76,11 +79,13 @@ GET     /movies/id/:movieId            controllers.MoviesController.getMovieById
 ###
 GET     /movies/title/:title             controllers.MoviesController.getMovieByTitle(title: String)
 
-### NoDocs ###
-GET   /docs/swagger-ui/*file        controllers.Assets.at(path:String="/public/lib/swagger-ui", file:String)
-
-### NoDocs ###
-GET   /assets/*file                 controllers.Assets.versioned(path="/public", file: Asset)
+###
+#  parameters:
+#    - name: body
+#      schema:
+#        $ref: '#/components/schemas/models.Movie'
+###
+PUT   /movies/:movieId              controllers.MoviesController.rateMovie(movieId: String)
 
 ###
 #  parameters:
@@ -88,5 +93,11 @@ GET   /assets/*file                 controllers.Assets.versioned(path="/public",
 #      schema:
 #        $ref: '#/components/schemas/models.Movie'
 ###
-
 DELETE  /movies/:movieId             controllers.MoviesController.deleteMovie(movieId:String)
+
+### NoDocs ###
+GET   /docs/swagger-ui/*file        controllers.Assets.at(path:String="/public/lib/swagger-ui", file:String)
+
+### NoDocs ###
+GET   /assets/*file                 controllers.Assets.versioned(path="/public", file: Asset)
+
