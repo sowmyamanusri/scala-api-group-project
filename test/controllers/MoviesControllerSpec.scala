@@ -18,12 +18,11 @@ class MoviesControllerSpec extends PlaySpec with GuiceOneAppPerTest with Injecti
 
     var sampleUpdatedMovie: Option[Movie] = Option(Movie(
       "2",
-      "Title",
       "https://imdb-api.com/images/original/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_Ratio0.6800_AL_.jpg",
       "Inception",
       "(2012)",
       "R",
-      4
+      "4"
     ))
     val controller = new MoviesController(stubControllerComponents(), mockDataService)
 
