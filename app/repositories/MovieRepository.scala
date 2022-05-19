@@ -42,4 +42,12 @@ class MovieRepository {
   def getMovieByTitle(title: String): mutable.Set[Movie] = movieList.collect {
       case movie if movie.title.toLowerCase().contains(title.toLowerCase()) => movie
   }
+
+  @throws(classOf[Exception])
+  def deleteMovie(movieId: String): Unit = {
+    if(!movieList.exists(_.id == movieId)) {
+      throw new Exception("Movie not found")
+    }
+    movieList--= movieList.filter( _.id == movieId)
+  }
 }

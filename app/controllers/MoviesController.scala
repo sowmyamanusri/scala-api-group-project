@@ -27,4 +27,9 @@ class MoviesController @Inject()(val controllerComponents: ControllerComponents,
     if (searchedMovies.isEmpty || searchedMovies == None) throw new Exception("No Movies found")
     Ok(Json.toJson(searchedMovies))
   }
+
+  def deleteMovie(movieId: String): Action[AnyContent] = Action {
+    dataRepository.deleteMovie(movieId)
+    Ok(Json.toJson(s"Successfully deleted movie of Id $movieId"))
+  }
 }

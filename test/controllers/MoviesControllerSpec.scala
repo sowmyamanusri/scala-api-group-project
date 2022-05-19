@@ -7,7 +7,7 @@ import play.api.test._
 import play.api.test.Helpers._
 import repositories.MovieRepository
 import models.Movie
-import org.mockito.ArgumentMatchers.any
+import org.mockito.ArgumentMatchers.{any, anyString}
 import org.mockito.Mockito.when
 import play.api.libs.json._
 import scala.collection.mutable
@@ -146,6 +146,18 @@ class MoviesControllerSpec extends PlaySpec with GuiceOneAppPerTest with Injecti
         controller.getMovieByTitle("st").apply(FakeRequest(GET, "/movies/title/st"))
       }
       exceptionCaught.getMessage mustBe "No Movies found"
+    }
+  }
+  "MoviesController DELETE deleteById" should {
+
+    "throw an error when deleting a book that doesn't exist" in {
+      when(mockDataService.deleteMovie(anyString())) thenThrow new Exception("Movie not found")
+      val controller = new MoviesController(stubControllerComponents(), mockDataService)
+      val exceptionCaught = intercept[Exception] {
+        controller.deleteMovie("10").apply(FakeRequest(DELETE, "/movies/10"))
+      }
+
+      exceptionCaught.getMessage mustBe "Movie not found"
     }
   }
 }
