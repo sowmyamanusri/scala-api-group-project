@@ -44,6 +44,42 @@ POST    /books                      controllers.BooksController.addBook()
 GET     /books/:bookId              controllers.BooksController.getBook(bookId: Long)
 
 ###
+#   summary: Get all Movies
+#   responses:
+#       200:
+#           description: success
+#           content:
+#               application/json:
+#                   schema:
+#                       $ref: '#/components/schemas/models.Movie'
+###
+GET     /movies                     controllers.MoviesController.getAll()
+
+###
+#   summary: Get a Movie by ID
+#   responses:
+#       200:
+#           description: success
+#           content:
+#               application/json:
+#                   schema:
+#                       $ref: '#/components/schemas/models.Movie'
+###
+GET     /movies/id/:movieId            controllers.MoviesController.getMovieById(movieId: String)
+
+###
+#   summary: Get a Movie by Name
+#   responses:
+#       200:
+#           description: success
+#           content:
+#               application/json:
+#                   schema:
+#                       $ref: '#/components/schemas/models.Movie'
+###
+GET     /movies/title/:title             controllers.MoviesController.getMovieByTitle(title: String)
+
+###
 #  parameters:
 #    - name: body
 #      schema:
@@ -51,8 +87,17 @@ GET     /books/:bookId              controllers.BooksController.getBook(bookId: 
 ###
 PUT   /movies/:movieId              controllers.MoviesController.rateMovie(movieId: String)
 
+###
+#  parameters:
+#    - name: body
+#      schema:
+#        $ref: '#/components/schemas/models.Movie'
+###
+DELETE  /movies/:movieId             controllers.MoviesController.deleteMovie(movieId:String)
+
 ### NoDocs ###
 GET   /docs/swagger-ui/*file        controllers.Assets.at(path:String="/public/lib/swagger-ui", file:String)
 
 ### NoDocs ###
 GET   /assets/*file                 controllers.Assets.versioned(path="/public", file: Asset)
+
