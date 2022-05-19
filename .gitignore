@@ -7,3 +7,9 @@ target
 /.project
 /.settings
 /RUNNING_PID
+/.DS_Store
+/app/.DS_Store
+/app/controllers/.DS_Store
+/app/repositories/.DS_Store
+/test/.DS_Store
+/test/controllers/.DS_Store
