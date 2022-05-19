@@ -17,7 +17,7 @@ class MoviesControllerSpec extends PlaySpec with GuiceOneAppPerTest with Injecti
   val mockDataService: MovieRepository = mock[MovieRepository]
 
     var sampleUpdatedMovie: Option[Movie] = Option(Movie(
-      "2",
+      "tt137566",
       "https://imdb-api.com/images/original/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_Ratio0.6800_AL_.jpg",
       "Inception",
       "(2012)",
@@ -29,9 +29,9 @@ class MoviesControllerSpec extends PlaySpec with GuiceOneAppPerTest with Injecti
     "return 200 OK for Update single Movie " in {
 
       // Here we utilise Mockito for stubbing the request to getBook
-      when(mockDataService.rateMovie("2", sampleUpdatedMovie.get)) thenReturn sampleUpdatedMovie
+      when(mockDataService.rateMovie("tt137566", sampleUpdatedMovie.get)) thenReturn sampleUpdatedMovie
 
-      var updateMovie = controller.rateMovie("2").apply(
+      var updateMovie = controller.rateMovie("tt137566").apply(
         FakeRequest(PUT, "/Movies").withJsonBody(Json.toJson(sampleUpdatedMovie)))
 
       status(updateMovie) mustBe CREATED
