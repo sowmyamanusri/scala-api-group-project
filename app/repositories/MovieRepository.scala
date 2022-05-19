@@ -15,8 +15,19 @@ class MovieRepository {
     "Léon: The Professional",
     "After her father, step-mother, step-sister and little brother are killed by her father's employers, the 12-year-old daughter of an abject drug dealer manages to take refuge in the apartment of a professional hitman who at her request teaches her the methods of his job so she can take her revenge on the corrupt DEA agent who ruined her life by killing her beloved brother.",
     "R",
-    4
+    "4"
   )
+  movieList += Movie(
+    "tt1375666",
+    "Advanced Search",
+    "https://imdb-api.com/images/original/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_Ratio0.6837_AL_.jpg",
+    "Inception",
+    "(2010)",
+    "PG-13",
+    "4"
+  )
+
+  def getAllMovies: mutable.Set[Movie] = movieList
 
   /**
    * @param movieId The ID of the movie to find
