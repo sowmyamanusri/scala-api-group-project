@@ -1,42 +1,36 @@
 package controllers
 
-import org.scalatestplus.mockito.MockitoSugar
-import org.scalatestplus.play._
-import org.scalatestplus.play.guice._
-import play.api.test._
-import play.api.test.Helpers._
-import repositories.MovieRepository
 import models.Movie
-import org.mockito.ArgumentMatchers.any
-import org.mockito.Mockito.when
 import play.api.libs.json._
-import scala.collection.mutable
+import play.api.mvc.{Action, AnyContent, BaseController, ControllerComponents}
+import repositories.MovieRepository
 
-class MoviesControllerSpec extends PlaySpec with GuiceOneAppPerTest with Injecting with MockitoSugar {
+import javax.inject.{Inject, Singleton}
 
-  val mockDataService: MovieRepository = mock[MovieRepository]
+/**
+ * This controller creates an `Action` to handle HTTP requests to the
+ * Movie's home page.
+ */
+@Singleton
+class MoviesController @Inject()(val controllerComponents: ControllerComponents, dataRepository: MovieRepository) extends BaseController {
 
-    var sampleUpdatedMovie: Option[Movie] = Option(Movie(
-      "tt137566",
-      "https://imdb-api.com/images/original/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_Ratio0.6800_AL_.jpg",
-      "Inception",
-      "(2012)",
-      "R",
-      "4"
-    ))
-    val controller = new MoviesController(stubControllerComponents(), mockDataService)
+  //revise specification on 2022/5/19
+  def rateMovie(movieId: String): Action[AnyContent] = Action {
+    implicit request =>
+      try {
+        val requestBody = request.body
+        val movieJsonObject = requestBody.asJson
 
-    "return 200 OK for Update single Movie " in {
-
-      // Here we utilise Mockito for stubbing the request to getBook
-      when(mockDataService.rateMovie("tt137566", sampleUpdatedMovie.get)) thenReturn sampleUpdatedMovie
-
-      var updateMovie = controller.rateMovie("tt137566").apply(
-        FakeRequest(PUT, "/Movies").withJsonBody(Json.toJson(sampleUpdatedMovie)))
-
-      status(updateMovie) mustBe CREATED
-      contentType(updateMovie) mustBe Some("application/json")
-      contentAsString(updateMovie) contains  ("\"Rating\":4")//(Json.toJson(sampleUpdatedMovie))
-    }
-
+        // This type of JSON un-marshalling will only work
+        // if ALL fields are POSTed in the request body
+        val movieItem: Option[Movie] =
+        movieJsonObject.flatMap(
+          Json.fromJson[Movie](_).asOpt
+        )
+        val editMovie = dataRepository.rateMovie(movieId, movieItem.get)
+        if (editMovie.isEmpty || editMovie == None) throw new Exception("Movie is not exists.")
+        Created(Json.toJson(editMovie))}
+      catch {case ex: Exception => InternalServerError(Json.obj("code" -> INTERNAL_SERVER_ERROR, "message" -> s"Rate movie error : ${ex.getMessage}"))}
+  }
 }
+

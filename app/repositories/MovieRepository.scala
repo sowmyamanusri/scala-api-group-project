@@ -18,6 +18,7 @@ class MovieRepository {
 
   def rateMovie(movieId: String, rateMovie: Movie): Option[Movie] = {
     // If book already exists then return none
+    // revise specification on 2022/5/19
     println(s"movieId:$movieId")
     var matchMovie = MovieList.find(_.id == movieId)
     var updateMovie = Movie(

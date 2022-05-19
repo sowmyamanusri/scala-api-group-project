@@ -14,6 +14,7 @@ import javax.inject.{Inject, Singleton}
 @Singleton
 class MoviesController @Inject()(val controllerComponents: ControllerComponents, dataRepository: MovieRepository) extends BaseController {
 
+  //revise specification on 2022/5/19
   def rateMovie(movieId: String): Action[AnyContent] = Action {
     implicit request =>
       try {

@@ -23,6 +23,7 @@ import play.api.libs.json.Json
  *  IMDbRating: Int
  *    store the rating No from 1 to 5, for the update function of the data.
  *
+ * revise specification on 2022/5/19
  */
 
 case class Movie(id: String, Image: String, Title: String, plot: String, Certification: String, IMDbRating: String)
