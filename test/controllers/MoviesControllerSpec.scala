@@ -148,14 +148,16 @@ class MoviesControllerSpec extends PlaySpec with GuiceOneAppPerTest with Injecti
       exceptionCaught.getMessage mustBe "No Movies found"
     }
   }
+  "MoviesController DELETE deleteById" should {
 
-  "throw an error when deleting a book that doesn't exist" in {
-    when(mockDataService.deleteMovie(anyString())) thenThrow new Exception("Movie not found")
-    val controller = new MoviesController(stubControllerComponents(), mockDataService)
-    val exceptionCaught = intercept[Exception] {
-      controller.deleteMovie("10").apply(FakeRequest(DELETE, "/movies/10"))
+    "throw an error when deleting a book that doesn't exist" in {
+      when(mockDataService.deleteMovie(anyString())) thenThrow new Exception("Movie not found")
+      val controller = new MoviesController(stubControllerComponents(), mockDataService)
+      val exceptionCaught = intercept[Exception] {
+        controller.deleteMovie("10").apply(FakeRequest(DELETE, "/movies/10"))
+      }
+
+      exceptionCaught.getMessage mustBe "Movie not found"
     }
-
-    exceptionCaught.getMessage mustBe "Movie not found"
   }
 }

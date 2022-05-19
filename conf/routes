@@ -83,14 +83,10 @@ GET   /docs/swagger-ui/*file        controllers.Assets.at(path:String="/public/l
 GET   /assets/*file                 controllers.Assets.versioned(path="/public", file: Asset)
 
 ###
-#   summary: Delete a Book by ID
-#   responses:
-#       200:
-#           description: success
-#           content:
-#               application/json:
-#                   schema:
-#                       $ref: '#/components/schemas/models.Book'
+#  parameters:
+#    - name: body
+#      schema:
+#        $ref: '#/components/schemas/models.Movie'
 ###
 
 DELETE  /movies/:movieId             controllers.MoviesController.deleteMovie(movieId:String)
