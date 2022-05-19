@@ -119,10 +119,9 @@ class MoviesControllerSpec extends PlaySpec with GuiceOneAppPerTest with Injecti
       sampleMovie += Movie("tt0111413",
         "Thin Ice",
         "https://imdb-api.com/images/original/MV5BMTM2NjQyMTY0M15BMl5BanBnXkFtZTcwMjI4MTIyMQ@@._V1_Ratio0.6751_AL_.jpg",
-        "Thin Ice",
         "Steffi, a black photographer, and her journalist friend Greg persuade a magazine editor to commission an article on New York's upcoming Gay Games. Only weeks before the event, however, Steffi is dumped by her ice skating partner and lover, thus jeopardizing the article. But she soon meets Natalie.",
         "",
-        3
+        "3"
       )
 
       // Here we utilise Mockito for stubbing the request to getMovieByTitle

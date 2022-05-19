@@ -39,9 +39,7 @@ class MovieRepository {
    * @param movietitle The title of the movie to find
    * @return Option[Movie] An option means this method can return a Movie or optionally a "None"
    */
-  def getMovieByTitle(title: String): mutable.Set[Movie] = {
-    movieList.collect {
-      case movie if movie.Title.toLowerCase().contains(title.toLowerCase()) => movie
-    }
+  def getMovieByTitle(title: String): mutable.Set[Movie] = movieList.collect {
+      case movie if movie.title.toLowerCase().contains(title.toLowerCase()) => movie
   }
 }
