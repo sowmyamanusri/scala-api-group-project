@@ -20,4 +20,11 @@ class MoviesController @Inject()(val controllerComponents: ControllerComponents,
     if (searchedMovies.isEmpty || searchedMovies == None) throw new Exception("No Movies found")
     Ok(Json.toJson(searchedMovies))
   }
+
+  @throws(classOf[Exception])
+  def getMovieByTitle(title: String): Action[AnyContent] = Action {
+    val searchedMovies = dataRepository.getMovieByTitle(title)
+    if (searchedMovies.isEmpty || searchedMovies == None) throw new Exception("No Movies found")
+    Ok(Json.toJson(searchedMovies))
+  }
 }

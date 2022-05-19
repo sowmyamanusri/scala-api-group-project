@@ -99,4 +99,53 @@ class MoviesControllerSpec extends PlaySpec with GuiceOneAppPerTest with Injecti
       exceptionCaught.getMessage mustBe "No Movies found"
     }
   }
+
+  "MoviesController GET movieByTitle" should {
+
+    "return 200 OK for single movie request" in {
+
+      // Here we utilise Mockito for stubbing the request to getMovieByTitle
+      when(mockDataService.getMovieByTitle("pro")) thenReturn sampleMovie
+
+      val controller = new MoviesController(stubControllerComponents(), mockDataService)
+      val movie = controller.getMovieByTitle("pro").apply(FakeRequest(GET, "/movies/title/pro"))
+
+      status(movie) mustBe OK
+      contentType(movie) mustBe Some("application/json")
+    }
+
+    "return all the results that matches movie title request" in {
+
+      sampleMovie += Movie("tt0111413",
+        "Thin Ice",
+        "https://imdb-api.com/images/original/MV5BMTM2NjQyMTY0M15BMl5BanBnXkFtZTcwMjI4MTIyMQ@@._V1_Ratio0.6751_AL_.jpg",
+        "Steffi, a black photographer, and her journalist friend Greg persuade a magazine editor to commission an article on New York's upcoming Gay Games. Only weeks before the event, however, Steffi is dumped by her ice skating partner and lover, thus jeopardizing the article. But she soon meets Natalie.",
+        "",
+        "3"
+      )
+
+      // Here we utilise Mockito for stubbing the request to getMovieByTitle
+      when(mockDataService.getMovieByTitle("th")) thenReturn sampleMovie
+
+      val controller = new MoviesController(stubControllerComponents(), mockDataService)
+      val movies = controller.getMovieByTitle("th").apply(FakeRequest(GET, "/movies/title/th"))
+
+      status(movies) mustBe OK
+      contentAsString(movies) mustEqual Json.toJson(sampleMovie).toString()
+
+      contentType(movies) mustBe Some("application/json")
+    }
+
+    "return Exception for unavailable movie Id request" in {
+
+      //Here we utilise Mockito for stubbing the request to getMovieByTitle
+      when(mockDataService.getMovieByTitle("st"))  thenReturn mutable.Set[Movie]()
+
+      val controller = new MoviesController(stubControllerComponents(), mockDataService)
+      val exceptionCaught = intercept[Exception] {
+        controller.getMovieByTitle("st").apply(FakeRequest(GET, "/movies/title/st"))
+      }
+      exceptionCaught.getMessage mustBe "No Movies found"
+    }
+  }
 }

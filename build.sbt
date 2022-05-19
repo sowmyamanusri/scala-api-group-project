@@ -14,6 +14,7 @@ libraryDependencies += "org.webjars" % "swagger-ui" % "4.1.2"
 
 swaggerDomainNameSpaces := Seq("models")
 swaggerV3 := true
+swaggerPrettyJson := true
 
 // Adds additional packages into Twirl
 //TwirlKeys.templateImports += "com.techreturners.controllers._"
