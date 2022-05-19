@@ -41,6 +41,30 @@ POST    /books                      controllers.BooksController.addBook()
 GET     /books/:bookId              controllers.BooksController.getBook(bookId: Long)
 
 ###
+#   summary: Get all Movies
+#   responses:
+#       200:
+#           description: success
+#           content:
+#               application/json:
+#                   schema:
+#                       $ref: '#/components/schemas/models.Movie'
+###
+GET     /movies                     controllers.MoviesController.getAll()
+
+###
+#   summary: Get a Movie by ID
+#   responses:
+#       200:
+#           description: success
+#           content:
+#               application/json:
+#                   schema:
+#                       $ref: '#/components/schemas/models.Movie'
+###
+GET     /movies/id/:movieId            controllers.MoviesController.getMovieById(movieId: String)
+
+###
 #   summary: Get a Movie by Name
 #   responses:
 #       200:
