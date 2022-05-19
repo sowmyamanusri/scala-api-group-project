@@ -50,7 +50,7 @@ GET     /books/:bookId              controllers.BooksController.getBook(bookId: 
 #                   schema:
 #                       $ref: '#/components/schemas/models.Movie'
 ###
-GET     /movies/searchTitle/:title             controllers.MoviesController.getMovieByTitle(title: String)
+GET     /movies/title/:title             controllers.MoviesController.getMovieByTitle(title: String)
 
 ### NoDocs ###
 GET   /docs/swagger-ui/*file        controllers.Assets.at(path:String="/public/lib/swagger-ui", file:String)
